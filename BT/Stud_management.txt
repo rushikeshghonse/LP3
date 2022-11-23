@@ -1,0 +1,39 @@
+//SPDX-License-Identifier:-UNLICENCED"
+pragma solidity 0.8.4;
+
+contract School
+{
+    struct Student
+    {
+        int Id;
+        string fname;
+        string lname;
+        int marks;
+    }
+
+    int public stdCount=0;
+    address owner;
+    mapping(int=>Student) public studRecords;
+
+    modifier onlyOwner
+    {
+        require(owner==msg.sender);
+        _;
+    }
+
+    constructor()
+    {
+        owner = msg.sender;
+    }
+
+    function addStudent(
+                        int _Id,
+                        string memory _fname,
+                        string memory _lname,
+                        int _marks) public onlyOwner
+    {
+        stdCount+=1;
+        studRecords[stdCount] = Student(_Id,_fname,_lname,_marks);
+    }
+
+}

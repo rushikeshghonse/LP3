@@ -1,0 +1,28 @@
+pragma solidity 0.4.25;
+
+contract Bank
+{
+    uint256 bal;
+
+    constructor() public
+    {
+        bal=1;
+    } 
+
+    function getBalance() view public returns(uint256)
+    {
+        return bal;
+    }
+
+    function deposite( uint256 ammount) public
+    {
+        bal = bal + ammount;
+    }
+
+    function withdraw( uint256 ammount) public
+    {
+        require(bal>ammount,"Available balance is not sufficient.");
+        bal = bal - ammount;
+    }
+
+}
